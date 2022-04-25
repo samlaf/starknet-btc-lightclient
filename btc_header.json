@@ -1,0 +1,667 @@
+{
+    "attributes": [],
+    "builtins": [],
+    "data": [
+        "0x480a7ff87fff8000",
+        "0x480a7ff97fff8000",
+        "0x480a7ffa7fff8000",
+        "0x480a7ffb7fff8000",
+        "0x480a7ffc7fff8000",
+        "0x480a7ffd7fff8000",
+        "0x208b7fff7fff7ffe",
+        "0x208b7fff7fff7ffe",
+        "0x208b7fff7fff7ffe"
+    ],
+    "debug_info": {
+        "file_contents": {},
+        "instruction_locations": {
+            "0": {
+                "accessible_scopes": [
+                    "__main__",
+                    "__main__.get_header"
+                ],
+                "flow_tracking_data": {
+                    "ap_tracking": {
+                        "group": 0,
+                        "offset": 0
+                    },
+                    "reference_ids": {
+                        "__main__.get_header.bits": 4,
+                        "__main__.get_header.merkle_root": 2,
+                        "__main__.get_header.nonce": 5,
+                        "__main__.get_header.previous": 1,
+                        "__main__.get_header.time": 3,
+                        "__main__.get_header.version": 0
+                    }
+                },
+                "hints": [],
+                "inst": {
+                    "end_col": 23,
+                    "end_line": 11,
+                    "input_file": {
+                        "filename": "btc_header.cairo"
+                    },
+                    "parent_location": [
+                        {
+                            "end_col": 34,
+                            "end_line": 13,
+                            "input_file": {
+                                "filename": "btc_header.cairo"
+                            },
+                            "start_col": 27,
+                            "start_line": 13
+                        },
+                        "While expanding the reference 'version' in:"
+                    ],
+                    "start_col": 9,
+                    "start_line": 11
+                }
+            },
+            "1": {
+                "accessible_scopes": [
+                    "__main__",
+                    "__main__.get_header"
+                ],
+                "flow_tracking_data": {
+                    "ap_tracking": {
+                        "group": 0,
+                        "offset": 1
+                    },
+                    "reference_ids": {
+                        "__main__.get_header.bits": 4,
+                        "__main__.get_header.merkle_root": 2,
+                        "__main__.get_header.nonce": 5,
+                        "__main__.get_header.previous": 1,
+                        "__main__.get_header.time": 3,
+                        "__main__.get_header.version": 0
+                    }
+                },
+                "hints": [],
+                "inst": {
+                    "end_col": 41,
+                    "end_line": 11,
+                    "input_file": {
+                        "filename": "btc_header.cairo"
+                    },
+                    "parent_location": [
+                        {
+                            "end_col": 44,
+                            "end_line": 13,
+                            "input_file": {
+                                "filename": "btc_header.cairo"
+                            },
+                            "start_col": 36,
+                            "start_line": 13
+                        },
+                        "While expanding the reference 'previous' in:"
+                    ],
+                    "start_col": 25,
+                    "start_line": 11
+                }
+            },
+            "2": {
+                "accessible_scopes": [
+                    "__main__",
+                    "__main__.get_header"
+                ],
+                "flow_tracking_data": {
+                    "ap_tracking": {
+                        "group": 0,
+                        "offset": 2
+                    },
+                    "reference_ids": {
+                        "__main__.get_header.bits": 4,
+                        "__main__.get_header.merkle_root": 2,
+                        "__main__.get_header.nonce": 5,
+                        "__main__.get_header.previous": 1,
+                        "__main__.get_header.time": 3,
+                        "__main__.get_header.version": 0
+                    }
+                },
+                "hints": [],
+                "inst": {
+                    "end_col": 62,
+                    "end_line": 11,
+                    "input_file": {
+                        "filename": "btc_header.cairo"
+                    },
+                    "parent_location": [
+                        {
+                            "end_col": 57,
+                            "end_line": 13,
+                            "input_file": {
+                                "filename": "btc_header.cairo"
+                            },
+                            "start_col": 46,
+                            "start_line": 13
+                        },
+                        "While expanding the reference 'merkle_root' in:"
+                    ],
+                    "start_col": 43,
+                    "start_line": 11
+                }
+            },
+            "3": {
+                "accessible_scopes": [
+                    "__main__",
+                    "__main__.get_header"
+                ],
+                "flow_tracking_data": {
+                    "ap_tracking": {
+                        "group": 0,
+                        "offset": 3
+                    },
+                    "reference_ids": {
+                        "__main__.get_header.bits": 4,
+                        "__main__.get_header.merkle_root": 2,
+                        "__main__.get_header.nonce": 5,
+                        "__main__.get_header.previous": 1,
+                        "__main__.get_header.time": 3,
+                        "__main__.get_header.version": 0
+                    }
+                },
+                "hints": [],
+                "inst": {
+                    "end_col": 75,
+                    "end_line": 11,
+                    "input_file": {
+                        "filename": "btc_header.cairo"
+                    },
+                    "parent_location": [
+                        {
+                            "end_col": 63,
+                            "end_line": 13,
+                            "input_file": {
+                                "filename": "btc_header.cairo"
+                            },
+                            "start_col": 59,
+                            "start_line": 13
+                        },
+                        "While expanding the reference 'time' in:"
+                    ],
+                    "start_col": 64,
+                    "start_line": 11
+                }
+            },
+            "4": {
+                "accessible_scopes": [
+                    "__main__",
+                    "__main__.get_header"
+                ],
+                "flow_tracking_data": {
+                    "ap_tracking": {
+                        "group": 0,
+                        "offset": 4
+                    },
+                    "reference_ids": {
+                        "__main__.get_header.bits": 4,
+                        "__main__.get_header.merkle_root": 2,
+                        "__main__.get_header.nonce": 5,
+                        "__main__.get_header.previous": 1,
+                        "__main__.get_header.time": 3,
+                        "__main__.get_header.version": 0
+                    }
+                },
+                "hints": [],
+                "inst": {
+                    "end_col": 88,
+                    "end_line": 11,
+                    "input_file": {
+                        "filename": "btc_header.cairo"
+                    },
+                    "parent_location": [
+                        {
+                            "end_col": 69,
+                            "end_line": 13,
+                            "input_file": {
+                                "filename": "btc_header.cairo"
+                            },
+                            "start_col": 65,
+                            "start_line": 13
+                        },
+                        "While expanding the reference 'bits' in:"
+                    ],
+                    "start_col": 77,
+                    "start_line": 11
+                }
+            },
+            "5": {
+                "accessible_scopes": [
+                    "__main__",
+                    "__main__.get_header"
+                ],
+                "flow_tracking_data": {
+                    "ap_tracking": {
+                        "group": 0,
+                        "offset": 5
+                    },
+                    "reference_ids": {
+                        "__main__.get_header.bits": 4,
+                        "__main__.get_header.merkle_root": 2,
+                        "__main__.get_header.nonce": 5,
+                        "__main__.get_header.previous": 1,
+                        "__main__.get_header.time": 3,
+                        "__main__.get_header.version": 0
+                    }
+                },
+                "hints": [],
+                "inst": {
+                    "end_col": 21,
+                    "end_line": 12,
+                    "input_file": {
+                        "filename": "btc_header.cairo"
+                    },
+                    "parent_location": [
+                        {
+                            "end_col": 76,
+                            "end_line": 13,
+                            "input_file": {
+                                "filename": "btc_header.cairo"
+                            },
+                            "start_col": 71,
+                            "start_line": 13
+                        },
+                        "While expanding the reference 'nonce' in:"
+                    ],
+                    "start_col": 9,
+                    "start_line": 12
+                }
+            },
+            "6": {
+                "accessible_scopes": [
+                    "__main__",
+                    "__main__.get_header"
+                ],
+                "flow_tracking_data": {
+                    "ap_tracking": {
+                        "group": 0,
+                        "offset": 6
+                    },
+                    "reference_ids": {
+                        "__main__.get_header.bits": 4,
+                        "__main__.get_header.merkle_root": 2,
+                        "__main__.get_header.nonce": 5,
+                        "__main__.get_header.previous": 1,
+                        "__main__.get_header.time": 3,
+                        "__main__.get_header.version": 0
+                    }
+                },
+                "hints": [],
+                "inst": {
+                    "end_col": 78,
+                    "end_line": 13,
+                    "input_file": {
+                        "filename": "btc_header.cairo"
+                    },
+                    "start_col": 5,
+                    "start_line": 13
+                }
+            },
+            "7": {
+                "accessible_scopes": [
+                    "__main__",
+                    "__main__.prepare_header"
+                ],
+                "flow_tracking_data": {
+                    "ap_tracking": {
+                        "group": 1,
+                        "offset": 0
+                    },
+                    "reference_ids": {
+                        "__main__.prepare_header.data": 6
+                    }
+                },
+                "hints": [],
+                "inst": {
+                    "end_col": 14,
+                    "end_line": 17,
+                    "input_file": {
+                        "filename": "btc_header.cairo"
+                    },
+                    "start_col": 5,
+                    "start_line": 17
+                }
+            },
+            "8": {
+                "accessible_scopes": [
+                    "__main__",
+                    "__main__.main"
+                ],
+                "flow_tracking_data": {
+                    "ap_tracking": {
+                        "group": 2,
+                        "offset": 0
+                    },
+                    "reference_ids": {}
+                },
+                "hints": [],
+                "inst": {
+                    "end_col": 14,
+                    "end_line": 21,
+                    "input_file": {
+                        "filename": "btc_header.cairo"
+                    },
+                    "start_col": 5,
+                    "start_line": 21
+                }
+            }
+        }
+    },
+    "hints": {},
+    "identifiers": {
+        "__main__.BTCHeader": {
+            "full_name": "__main__.BTCHeader",
+            "members": {
+                "bits": {
+                    "cairo_type": "felt",
+                    "offset": 4
+                },
+                "merkle_root": {
+                    "cairo_type": "felt*",
+                    "offset": 2
+                },
+                "nonce": {
+                    "cairo_type": "felt",
+                    "offset": 5
+                },
+                "revious": {
+                    "cairo_type": "felt*",
+                    "offset": 1
+                },
+                "time": {
+                    "cairo_type": "felt",
+                    "offset": 3
+                },
+                "version": {
+                    "cairo_type": "felt",
+                    "offset": 0
+                }
+            },
+            "size": 6,
+            "type": "struct"
+        },
+        "__main__.get_header": {
+            "decorators": [],
+            "pc": 0,
+            "type": "function"
+        },
+        "__main__.get_header.Args": {
+            "full_name": "__main__.get_header.Args",
+            "members": {
+                "bits": {
+                    "cairo_type": "felt",
+                    "offset": 4
+                },
+                "merkle_root": {
+                    "cairo_type": "felt*",
+                    "offset": 2
+                },
+                "nonce": {
+                    "cairo_type": "felt",
+                    "offset": 5
+                },
+                "previous": {
+                    "cairo_type": "felt*",
+                    "offset": 1
+                },
+                "time": {
+                    "cairo_type": "felt",
+                    "offset": 3
+                },
+                "version": {
+                    "cairo_type": "felt",
+                    "offset": 0
+                }
+            },
+            "size": 6,
+            "type": "struct"
+        },
+        "__main__.get_header.ImplicitArgs": {
+            "full_name": "__main__.get_header.ImplicitArgs",
+            "members": {},
+            "size": 0,
+            "type": "struct"
+        },
+        "__main__.get_header.Return": {
+            "full_name": "__main__.get_header.Return",
+            "members": {
+                "res": {
+                    "cairo_type": "__main__.BTCHeader",
+                    "offset": 0
+                }
+            },
+            "size": 6,
+            "type": "struct"
+        },
+        "__main__.get_header.SIZEOF_LOCALS": {
+            "type": "const",
+            "value": 0
+        },
+        "__main__.get_header.bits": {
+            "cairo_type": "felt",
+            "full_name": "__main__.get_header.bits",
+            "references": [
+                {
+                    "ap_tracking_data": {
+                        "group": 0,
+                        "offset": 0
+                    },
+                    "pc": 0,
+                    "value": "[cast(fp + (-4), felt*)]"
+                }
+            ],
+            "type": "reference"
+        },
+        "__main__.get_header.merkle_root": {
+            "cairo_type": "felt*",
+            "full_name": "__main__.get_header.merkle_root",
+            "references": [
+                {
+                    "ap_tracking_data": {
+                        "group": 0,
+                        "offset": 0
+                    },
+                    "pc": 0,
+                    "value": "[cast(fp + (-6), felt**)]"
+                }
+            ],
+            "type": "reference"
+        },
+        "__main__.get_header.nonce": {
+            "cairo_type": "felt",
+            "full_name": "__main__.get_header.nonce",
+            "references": [
+                {
+                    "ap_tracking_data": {
+                        "group": 0,
+                        "offset": 0
+                    },
+                    "pc": 0,
+                    "value": "[cast(fp + (-3), felt*)]"
+                }
+            ],
+            "type": "reference"
+        },
+        "__main__.get_header.previous": {
+            "cairo_type": "felt*",
+            "full_name": "__main__.get_header.previous",
+            "references": [
+                {
+                    "ap_tracking_data": {
+                        "group": 0,
+                        "offset": 0
+                    },
+                    "pc": 0,
+                    "value": "[cast(fp + (-7), felt**)]"
+                }
+            ],
+            "type": "reference"
+        },
+        "__main__.get_header.time": {
+            "cairo_type": "felt",
+            "full_name": "__main__.get_header.time",
+            "references": [
+                {
+                    "ap_tracking_data": {
+                        "group": 0,
+                        "offset": 0
+                    },
+                    "pc": 0,
+                    "value": "[cast(fp + (-5), felt*)]"
+                }
+            ],
+            "type": "reference"
+        },
+        "__main__.get_header.version": {
+            "cairo_type": "felt",
+            "full_name": "__main__.get_header.version",
+            "references": [
+                {
+                    "ap_tracking_data": {
+                        "group": 0,
+                        "offset": 0
+                    },
+                    "pc": 0,
+                    "value": "[cast(fp + (-8), felt*)]"
+                }
+            ],
+            "type": "reference"
+        },
+        "__main__.main": {
+            "decorators": [],
+            "pc": 8,
+            "type": "function"
+        },
+        "__main__.main.Args": {
+            "full_name": "__main__.main.Args",
+            "members": {},
+            "size": 0,
+            "type": "struct"
+        },
+        "__main__.main.ImplicitArgs": {
+            "full_name": "__main__.main.ImplicitArgs",
+            "members": {},
+            "size": 0,
+            "type": "struct"
+        },
+        "__main__.main.Return": {
+            "full_name": "__main__.main.Return",
+            "members": {},
+            "size": 0,
+            "type": "struct"
+        },
+        "__main__.main.SIZEOF_LOCALS": {
+            "type": "const",
+            "value": 0
+        },
+        "__main__.prepare_header": {
+            "decorators": [],
+            "pc": 7,
+            "type": "function"
+        },
+        "__main__.prepare_header.Args": {
+            "full_name": "__main__.prepare_header.Args",
+            "members": {
+                "data": {
+                    "cairo_type": "felt*",
+                    "offset": 0
+                }
+            },
+            "size": 1,
+            "type": "struct"
+        },
+        "__main__.prepare_header.ImplicitArgs": {
+            "full_name": "__main__.prepare_header.ImplicitArgs",
+            "members": {},
+            "size": 0,
+            "type": "struct"
+        },
+        "__main__.prepare_header.Return": {
+            "full_name": "__main__.prepare_header.Return",
+            "members": {},
+            "size": 0,
+            "type": "struct"
+        },
+        "__main__.prepare_header.SIZEOF_LOCALS": {
+            "type": "const",
+            "value": 0
+        },
+        "__main__.prepare_header.data": {
+            "cairo_type": "felt*",
+            "full_name": "__main__.prepare_header.data",
+            "references": [
+                {
+                    "ap_tracking_data": {
+                        "group": 1,
+                        "offset": 0
+                    },
+                    "pc": 7,
+                    "value": "[cast(fp + (-3), felt**)]"
+                }
+            ],
+            "type": "reference"
+        }
+    },
+    "main_scope": "__main__",
+    "prime": "0x800000000000011000000000000000000000000000000000000000000000001",
+    "reference_manager": {
+        "references": [
+            {
+                "ap_tracking_data": {
+                    "group": 0,
+                    "offset": 0
+                },
+                "pc": 0,
+                "value": "[cast(fp + (-8), felt*)]"
+            },
+            {
+                "ap_tracking_data": {
+                    "group": 0,
+                    "offset": 0
+                },
+                "pc": 0,
+                "value": "[cast(fp + (-7), felt**)]"
+            },
+            {
+                "ap_tracking_data": {
+                    "group": 0,
+                    "offset": 0
+                },
+                "pc": 0,
+                "value": "[cast(fp + (-6), felt**)]"
+            },
+            {
+                "ap_tracking_data": {
+                    "group": 0,
+                    "offset": 0
+                },
+                "pc": 0,
+                "value": "[cast(fp + (-5), felt*)]"
+            },
+            {
+                "ap_tracking_data": {
+                    "group": 0,
+                    "offset": 0
+                },
+                "pc": 0,
+                "value": "[cast(fp + (-4), felt*)]"
+            },
+            {
+                "ap_tracking_data": {
+                    "group": 0,
+                    "offset": 0
+                },
+                "pc": 0,
+                "value": "[cast(fp + (-3), felt*)]"
+            },
+            {
+                "ap_tracking_data": {
+                    "group": 1,
+                    "offset": 0
+                },
+                "pc": 7,
+                "value": "[cast(fp + (-3), felt**)]"
+            }
+        ]
+    }
+}
