@@ -81,6 +81,7 @@ def header_to_cairo(block):
         print(f'data[{i}] = {d}')
 
 print(header_to_cairo(block0))
+print(header_to_cairo(block1))
 
 verifyBlock(block0)
 print(block0['hash'])
