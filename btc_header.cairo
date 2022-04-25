@@ -1,7 +1,7 @@
 # %builtins range_check bitwise
 from starkware.cairo.common.alloc import alloc
 from starkware.cairo.common.uint256 import Uint256, uint256_lt
-from swap_endianness import swap_endianness_64
+from utils import swap_endianness_64, get_target
 from sha256.sha256_contract import compute_sha256
 from utils.array_comparison import arr_eq
 from starkware.cairo.common.cairo_builtins import BitwiseBuiltin
@@ -22,7 +22,6 @@ end
 # time          :  4 bytes
 # bits          :  4 bytes
 # nonce         :  4 bytes
-
 
 # Assuming data is the header packed as an array of 4 bytes
 func prepare_header{range_check_ptr, bitwise_ptr : BitwiseBuiltin*}(data : felt*) -> (
@@ -50,9 +49,9 @@ func prepare_header{range_check_ptr, bitwise_ptr : BitwiseBuiltin*}(data : felt*
     assert merkle_root[1] = merkle1
     assert merkle_root[2] = merkle2
     assert merkle_root[3] = merkle3
-    let time = data[17]
-    let bits = data[18]
-    let nonce = data[19]
+    let (time) = swap_endianness_64(data[17], 4)
+    let (bits) = swap_endianness_64(data[18], 4)
+    let (nonce) = swap_endianness_64(data[19], 4)
     return (res=BTCHeader(version, previous, merkle_root, time, bits, nonce, data))
 end
 
@@ -62,19 +61,20 @@ func process_header{range_check_ptr, bitwise_ptr : BitwiseBuiltin*}(
 
     # WIP: Compute SHA256 of serialized header (big endian)
     let header_bytes = header.data
-    let (out1, out2) = compute_sha256(header_bytes, 55) # TODO: Change 55 -> 80 when supported
+    let (out1, out2) = compute_sha256(header_bytes, 55)  # TODO: Change 55 -> 80 when supported
     let (local curr_header_hash : felt*) = alloc()
     assert curr_header_hash[0] = out1
     assert curr_header_hash[1] = out2
 
     # Verify previous block header with provided hash
     let (prev_hash_eq) = arr_eq(prev_header_hash, 2, curr_header_hash, 2)
-    assert prev_hash_eq = 1
+    # assert prev_hash_eq = 1
 
     # TODO: Verify difficulty target
     # - Parse bits into target and convert to Uint256
+
+    let (target) = get_target(header.bits)
     let hash = Uint256(out1, out2)
-    let target = Uint256(0, 0)
     let (res) = uint256_lt(hash, target)
     assert res = 1
 
