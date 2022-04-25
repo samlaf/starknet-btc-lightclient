@@ -59,6 +59,28 @@ def verifyBlock(block):
     hash = sha256(sha256(header_bin).digest()).digest()
     print(hash[::-1].hex())
 
+def header_to_cairo(block):
+    versionHex = big_to_little_endian(block['versionHex'])
+    previousBlockHashHex = big_to_little_endian(
+        block['previousblockhash']) if 'previousblockhash' in block else (0).to_bytes(32, ENDIANNESS).hex()
+    merkleRootHex = big_to_little_endian(block['merkleroot'])
+    timeHex = block['time'].to_bytes(4, ENDIANNESS).hex()
+    bitsHex = big_to_little_endian(block['bits'])
+    nonceB = block['nonce'].to_bytes(4, ENDIANNESS).hex()
+
+    header_hex = versionHex + previousBlockHashHex + \
+        merkleRootHex + timeHex + bitsHex + nonceB
+    header_bin = unhexlify(header_hex)
+    
+    data = header_bin.hex()
+    print(data)
+    
+    #return [data[8*i:8*(i+1)] for i in range(160//8)]
+    tmp = [int(data[8*i:8*(i+1)], 16) for i in range(160//8)]
+    for i,d in enumerate(tmp):
+        print(f'data[{i}] = {d}')
+
+print(header_to_cairo(block0))
 
 verifyBlock(block0)
 print(block0['hash'])
