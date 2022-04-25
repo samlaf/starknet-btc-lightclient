@@ -1,4 +1,4 @@
-#%builtins range_check bitwise
+# %builtins range_check bitwise
 from starkware.cairo.common.alloc import alloc
 from swap_endianness import swap_endianness_64
 from sha256.sha256_contract import compute_sha256
@@ -63,18 +63,18 @@ end
 func process_header{range_check_ptr, bitwise_ptr : BitwiseBuiltin*}(
         header : BTCHeader, prev_header_hash : felt*):
     # TODO: Serialize header to bytes
-    let (header_bytes) = serialize_header_to_bytes(header)
-
-    # Check header length
-    assert header_bytes.num_bytes = 80
+    let header_bytes = header.data
 
     # TODO: Compute SHA256 of serialized header (big endian)
     # - Generalize 'compute_sha256' to inputs of at least 80 bytes
     # - Change output of 'compute_sha256' to 4 64-bit felts
-    let (curr_header_hash) = compute_sha256(header_bytes, 80)
+    let (out1, out2) = compute_sha256(header_bytes, 80)
+    let (curr_header_hash : felt*) = alloc()
+    assert curr_header_hash[0] = out1
+    assert curr_header_hash[1] = out2
 
     # TODO: Verify previous block header with provided hash
-    let (prev_hash_eq) = arr_eq(prev_header_hash, 4, curr_header_hash, 4)
+    let (prev_hash_eq) = arr_eq(prev_header_hash, 2, curr_header_hash, 2)
     assert prev_hash_eq = 1
 
     # TODO: Verify difficulty target
@@ -83,6 +83,7 @@ func process_header{range_check_ptr, bitwise_ptr : BitwiseBuiltin*}(
     # - Verify that hash > target using the 'uint256_le' function
 
     # TODO: Return current header hash
+    ret
 end
 
 func main{range_check_ptr, bitwise_ptr : BitwiseBuiltin*}():
