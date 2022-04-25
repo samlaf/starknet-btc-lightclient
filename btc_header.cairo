@@ -23,11 +23,6 @@ end
 # bits          :  4 bytes
 # nonce         :  4 bytes
 
-# func get_header(
-#        version : felt, previous : felt*, merkle_root : felt*, time : felt, bits : felt,
-#        nonce : felt) -> (res : BTCHeader):
-#    return (res=BTCHeader(version, previous, merkle_root, time, bits, nonce))
-# end
 
 # Assuming data is the header packed as an array of 4 bytes
 func prepare_header{range_check_ptr, bitwise_ptr : BitwiseBuiltin*}(data : felt*) -> (
@@ -77,13 +72,13 @@ func process_header{range_check_ptr, bitwise_ptr : BitwiseBuiltin*}(
     assert prev_hash_eq = 1
 
     # TODO: Verify difficulty target
-    # - Convert SHA256 hash to Uint256 (see src/starkware/cairo/common/uint256.cairo)
-    # - Parse bits into target and conert to Uint256
-    # - Verify that hash > target using the 'uint256_le' function
+    # - Parse bits into target and convert to Uint256
     let hash = Uint256(out1, out2)
     let target = Uint256(0, 0)
     let (res) = uint256_lt(hash, target)
     assert res = 1
+
+    # TODO: Verify difficulty target interval using timestamps
 
     # TODO: Return current header hash
     return (curr_header_hash)
