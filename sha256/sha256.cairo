@@ -1,4 +1,4 @@
-from packed_sha256 import BLOCK_SIZE, compute_message_schedule, sha2_compress, get_round_constants
+from sha256.packed_sha256 import BLOCK_SIZE, compute_message_schedule, sha2_compress, get_round_constants
 from starkware.cairo.common.alloc import alloc
 from starkware.cairo.common.registers import get_fp_and_pc
 from starkware.cairo.common.cairo_builtins import BitwiseBuiltin

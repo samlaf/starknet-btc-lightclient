@@ -1,7 +1,7 @@
-%builtins range_check bitwise
+#%builtins range_check bitwise
 from starkware.cairo.common.alloc import alloc
 from swap_endianness import swap_endianness_64
-from sha256.sha256 import compute_sha256
+from sha256.sha256_contract import compute_sha256
 from utils.array_comparison import arr_eq
 from starkware.cairo.common.cairo_builtins import BitwiseBuiltin
 
@@ -61,7 +61,7 @@ func prepare_header{range_check_ptr, bitwise_ptr : BitwiseBuiltin*}(data : felt*
 end
 
 func process_header{range_check_ptr, bitwise_ptr : BitwiseBuiltin*}(
-        header : Header, prev_header_hash : felt*):
+        header : BTCHeader, prev_header_hash : felt*):
     # TODO: Serialize header to bytes
     let (header_bytes) = serialize_header_to_bytes(header)
 
