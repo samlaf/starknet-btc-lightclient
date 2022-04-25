@@ -3,6 +3,8 @@ from starkware.cairo.common.math import assert_le
 from starkware.cairo.common.alloc import alloc
 from starkware.cairo.common.math import assert_nn_le, unsigned_div_rem
 from starkware.cairo.common.math_cmp import is_in_range
+from starkware.cairo.common.uint256 import Uint256
+from starkware.cairo.common.math import split_felt
 
 struct IntsSequence:
     member element : felt*
@@ -17,6 +19,20 @@ func pow{range_check_ptr}(base : felt, p : felt) -> (res : felt):
 
     let (accumulator) = pow(base=base, p=p - 1)
     return (base * accumulator)
+end
+
+func get_target{range_check_ptr}(bits : felt) -> (res : Uint256):
+    alloc_locals
+    let (exponent, local mantissa) = unsigned_div_rem(bits, 2 ** 24)
+    %{
+        print("bits", hex(ids.bits))
+        print("exponent", ids.exponent)
+        print("mantissa", ids.mantissa)
+    %}
+    let (exp) = pow(256, exponent - 3)
+    let tmp = mantissa * exp
+    let res_target = split_felt(tmp)
+    return (Uint256(res_target.low, res_target.high))
 end
 
 # func swap_endianness_many_words{ range_check_ptr, bitwise_ptr : BitwiseBuiltin* }(input: IntsSequence) -> (output: IntsSequence):
