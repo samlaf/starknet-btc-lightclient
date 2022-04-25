@@ -34,17 +34,17 @@ func process_header{range_check_ptr, bitwise_ptr : BitwiseBuiltin*}(
     # 		- Generalize 'compute_sha256' to inputs of at least 80 bytes
     # 		- Change output of 'compute_sha256' to 4 64-bit felts 
     let (curr_header_hash) = compute_sha256(header_bytes, 80)
-    
+
     # TODO: Verify previous block header with provided hash
     let (prev_hash_eq) = arr_eq(prev_header_hash, 4, curr_header_hash, 4)
-	assert prev_hash_eq = 1
+    assert prev_hash_eq = 1
 
     # TODO: Verify difficulty target
-	# 		- Convert SHA256 hash to Uint256 (see src/starkware/cairo/common/uint256.cairo)
-	#       - Parse bits into target and conert to Uint256
-	# 		- Verify that hash > target using the 'uint256_le' function
-	
-	# TODO: Return current header hash
+    # 		- Convert SHA256 hash to Uint256 (see src/starkware/cairo/common/uint256.cairo)
+    #       - Parse bits into target and conert to Uint256
+    # 		- Verify that hash > target using the 'uint256_le' function
+
+    # TODO: Return current header hash
 end
 
 func main():
