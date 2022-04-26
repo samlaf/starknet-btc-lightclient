@@ -24,12 +24,12 @@ end
 func get_target{range_check_ptr}(bits : felt) -> (res : Uint256):
     alloc_locals
     let (exponent, local mantissa) = unsigned_div_rem(bits, 2 ** 24)
-    %{
-        print("bits", hex(ids.bits))
-        print("exponent", ids.exponent)
-        print("mantissa", ids.mantissa)
-        print(hex(ids.mantissa*256**(ids.exponent - 3)))
-    %}
+    # %{
+    #     print("bits", hex(ids.bits))
+    #     print("exponent", ids.exponent)
+    #     print("mantissa", ids.mantissa)
+    #     print(hex(ids.mantissa*256**(ids.exponent - 3)))
+    # %}
     let (exp) = pow(256, exponent - 3)
     let tmp = mantissa * exp
     let res_target = split_felt(tmp)

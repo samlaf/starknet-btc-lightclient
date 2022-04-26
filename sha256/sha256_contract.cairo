@@ -53,7 +53,7 @@ func main{range_check_ptr, bitwise_ptr : BitwiseBuiltin*}():
         # 16 byte preimage
         pack_intarray32(
             ids.input.address_,
-            "f" * 16)
+            "f" * 160)
     %}
 
     let (out1, out2) = compute_sha256(input.elements, input.byte_len)

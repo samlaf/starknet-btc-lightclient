@@ -12,3 +12,13 @@ sha:
 	@cairo-compile sha256/sha256_contract.cairo --output build/sha256_cairo_contract_compiled.json
 	@echo "Running.."
 	@cairo-run --program build/sha256_cairo_contract_compiled.json --print_output --layout=all --print_info
+
+compile_deploy:
+	@echo "Compiling.."
+	@./starknet_compile.sh
+	@starknet-devnet &
+	@echo "Deploying..."
+	@./starknet_deploy.sh
+
+demo:
+	@python3 starknet_run.py

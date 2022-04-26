@@ -41,12 +41,12 @@ func sha256{range_check_ptr, sha256_ptr : felt*}(input : felt*, n_bytes : felt) 
     let sha256_start = sha256_ptr
     local num_chunks
     %{
-        print("input:", memory.get_range(ids.input, ids.n_bytes // 4))
-        print("n_bytes:", ids.n_bytes)
-        print()
+        # print("input:", memory.get_range(ids.input, ids.n_bytes // 4))
+        # print("n_bytes:", ids.n_bytes)
+        # print()
         from math import ceil
         ids.num_chunks = ceil(ids.n_bytes / 4 / ids.SHA256_INPUT_CHUNK_SIZE_FELTS)
-        print(ids.num_chunks)
+        # print(ids.num_chunks)
     %}
     # NOTE: We want to fill the input with SHA256_INPUT_CHUNK_SIZE_FELTS words
     #       starting from the initial n_bytes, and filling the rest according to
@@ -79,7 +79,6 @@ func sha256{range_check_ptr, sha256_ptr : felt*}(input : felt*, n_bytes : felt) 
             w = compute_message_schedule(memory.get_range(
                 ids.sha256_start + i*ids.SHA256_INPUT_CHUNK_SIZE_FELTS, ids.SHA256_INPUT_CHUNK_SIZE_FELTS))
             new_state = sha2_compress_function(new_state, w)
-            print(new_state)
 
         segments.write_arg(ids.output, new_state)
     %}

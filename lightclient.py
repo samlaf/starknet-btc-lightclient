@@ -7,6 +7,11 @@ with open("block0.json") as block0_file:
 with open("block1.json") as block1_file:
     block1 = json.load(block1_file)
 
+# from bitcoinlib.blocks import Block
+# b = Block(block1['hash'], block1['version'], block1['previousblockhash'],
+#       block1['merkleroot'], block1['time'], block1['bits'], block1['nonce'])
+# print(b.target_hex)
+
 # block header
 # [version, previousblockhash, merkleroot, time, bits, nonce]
 # [4,       32,                32,         4,    4,    4    ]
@@ -55,9 +60,11 @@ def verifyBlock(block):
 
     header_hex = versionHex + previousBlockHashHex + \
         merkleRootHex + timeHex + bitsHex + nonceB
+    print(len(header_hex), header_hex)
     header_bin = unhexlify(header_hex)
     hash = sha256(sha256(header_bin).digest()).digest()
-    #print(hash[::-1].hex())
+    print(hash[::-1].hex())
+
 
 def header_to_cairo(block):
     versionHex = big_to_little_endian(block['versionHex'])
@@ -71,20 +78,21 @@ def header_to_cairo(block):
     header_hex = versionHex + previousBlockHashHex + \
         merkleRootHex + timeHex + bitsHex + nonceB
     header_bin = unhexlify(header_hex)
-    
+
     data = header_bin.hex()
-    #print(data)
-    
-    #return [data[8*i:8*(i+1)] for i in range(160//8)]
+    # print(data)
+
+    # return [data[8*i:8*(i+1)] for i in range(160//8)]
     tmp = [int(data[8*i:8*(i+1)], 16) for i in range(160//8)]
-    #for i,d in enumerate(tmp):
+    # for i,d in enumerate(tmp):
     #    print(f'data[{i}] = {d}')
     return tmp
+
 
 if __name__ == "__main__":
     print(header_to_cairo(block0))
     print(header_to_cairo(block1))
-    
+
     verifyBlock(block0)
     print(block0['hash'])
     verifyBlock(block1)
