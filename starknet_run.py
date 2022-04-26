@@ -83,11 +83,13 @@ if __name__ == "__main__":
     API_KEY = os.environ["GETBLOCK_API_KEY"]
     CONTRACT_ADDR = os.environ["CONTRACT_ADDR"]
 
-    block_height = 1
-    block = get_block_by_height(block_height)
-
-    data = header_to_cairo(block)
-    print(data)
-
-    txhash = verify_block(CONTRACT_ADDR, block_height, data)
-    #poll_until_accepted([txhash], 5)
+    block_height = 0
+    while block_height < 733581:
+        print("Importing block from height {}", block_height)
+        block = get_block_by_height(block_height)
+        data = header_to_cairo(block)
+        print("Verifying block from height {}", block_height)
+        txhash = verify_block(CONTRACT_ADDR, block_height, data)
+        print("Waiting for transaction to be mined")
+        #poll_until_accepted([txhash], 5)
+        block_height += 1
