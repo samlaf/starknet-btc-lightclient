@@ -52,7 +52,9 @@ func prepare_header{range_check_ptr, bitwise_ptr : BitwiseBuiltin*}(data : felt*
     let (time) = swap_endianness_64(data[17], 4)
     let (bits) = swap_endianness_64(data[18], 4)
     let (nonce) = swap_endianness_64(data[19], 4)
-    return (BTCHeader(version, previous, merkle_root, time, bits, nonce, data))
+
+    local header : BTCHeader = BTCHeader(version, previous, merkle_root, time, bits, nonce, data)
+    return (header)
 end
 
 func process_header{range_check_ptr, bitwise_ptr : BitwiseBuiltin*}(
@@ -84,6 +86,7 @@ func process_header{range_check_ptr, bitwise_ptr : BitwiseBuiltin*}(
     return (curr_header_hash)
 end
 
+# NOTE: Uncomment builtin directive on line 1 of this file to run with Makefile
 func main{range_check_ptr, bitwise_ptr : BitwiseBuiltin*}():
     alloc_locals
 
