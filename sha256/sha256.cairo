@@ -1,4 +1,9 @@
-from sha256.packed_sha256 import BLOCK_SIZE, compute_message_schedule, sha2_compress, get_round_constants
+from sha256.packed_sha256 import (
+    BLOCK_SIZE,
+    compute_message_schedule,
+    sha2_compress,
+    get_round_constants,
+)
 from starkware.cairo.common.alloc import alloc
 from starkware.cairo.common.registers import get_fp_and_pc
 from starkware.cairo.common.cairo_builtins import BitwiseBuiltin
@@ -31,6 +36,14 @@ const SHA256_INSTANCE_SIZE = SHA256_INPUT_CHUNK_SIZE_FELTS + 2 * SHA256_STATE_SI
 func sha256{range_check_ptr, sha256_ptr : felt*}(input : felt*, n_bytes : felt) -> (output : felt*):
     assert_nn_le(n_bytes, 80)
     let sha256_start = sha256_ptr
+    %{
+        print("input:", memory.get_range(ids.input, ids.n_bytes // 4))
+        print("n_bytes:", ids.n_bytes)
+        print("n_words:", ids.SHA256_INPUT_CHUNK_SIZE_FELTS - 2)
+        print()
+    %}
+    # NOTE: n_words = 16 - 2 because we add the 2 other bytes in the assert statements just below
+    #       (not sure why we're not doing those asserts inside _sha256_input though...)
     _sha256_input(input=input, n_bytes=n_bytes, n_words=SHA256_INPUT_CHUNK_SIZE_FELTS - 2)
     assert sha256_ptr[0] = 0
     assert sha256_ptr[1] = n_bytes * 8
@@ -49,11 +62,16 @@ func sha256{range_check_ptr, sha256_ptr : felt*}(input : felt*, n_bytes : felt) 
 
     let output = sha256_ptr
     %{
+        print(ids.sha256_ptr, ids.sha256_start)
         from starkware.cairo.common.cairo_sha256.sha256_utils import (
             IV, compute_message_schedule, sha2_compress_function)
 
         _sha256_input_chunk_size_felts = int(ids.SHA256_INPUT_CHUNK_SIZE_FELTS)
+        # what's the point of this? Is it ever != 16?
         assert 0 <= _sha256_input_chunk_size_felts < 100
+
+        print(memory.get_range(
+            ids.sha256_start, _sha256_input_chunk_size_felts))
 
         w = compute_message_schedule(memory.get_range(
             ids.sha256_start, _sha256_input_chunk_size_felts))
@@ -64,12 +82,18 @@ func sha256{range_check_ptr, sha256_ptr : felt*}(input : felt*, n_bytes : felt) 
     return (output)
 end
 
+# this function essentially performs
+# https://blog.boot.dev/cryptography/how-sha-2-works-step-by-step-sha-256/#step-1---pre-processing
+# except that it doesn't take a 512 bits input... not sure why
 func _sha256_input{range_check_ptr, sha256_ptr : felt*}(
-        input : felt*, n_bytes : felt, n_words : felt):
+    input : felt*, n_bytes : felt, n_words : felt
+):
     alloc_locals
 
     local full_word
-    %{ ids.full_word = int(ids.n_bytes >= 4) %}
+    %{ 
+        ids.full_word = int(ids.n_bytes >= 4) 
+    %}
 
     if full_word != 0:
         assert sha256_ptr[0] = input[0]
@@ -100,7 +124,8 @@ end
 
 # Handles n blocks of BLOCK_SIZE SHA256 instances.
 func _finalize_sha256_inner{range_check_ptr, bitwise_ptr : BitwiseBuiltin*}(
-        sha256_ptr : felt*, n : felt, round_constants : felt*):
+    sha256_ptr : felt*, n : felt, round_constants : felt*
+):
     if n == 0:
         return ()
     end
@@ -239,12 +264,14 @@ func _finalize_sha256_inner{range_check_ptr, bitwise_ptr : BitwiseBuiltin*}(
     return _finalize_sha256_inner(
         sha256_ptr=sha256_start + SHA256_INSTANCE_SIZE * BLOCK_SIZE,
         n=n - 1,
-        round_constants=round_constants)
+        round_constants=round_constants,
+    )
 end
 
 # Verifies that the results of sha256() are valid.
 func finalize_sha256{range_check_ptr, bitwise_ptr : BitwiseBuiltin*}(
-        sha256_ptr_start : felt*, sha256_ptr_end : felt*):
+    sha256_ptr_start : felt*, sha256_ptr_end : felt*
+):
     alloc_locals
 
     let (__fp__, _) = get_fp_and_pc()
