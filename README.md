@@ -1,8 +1,10 @@
 # Demo
 
-1. Run `make compile_deploy` in a terminal.
-2. Export the printed contract address: `export CONTRACT_ADDR=<CONTRACT_ADDR>
-3. Run `make demo` in a separate terminal.
+1. pip install starknet-devnet
+2. mkdir build
+3. Run `make compile_deploy` in a terminal.
+4. Export the printed contract address: `export CONTRACT_ADDR=<CONTRACT_ADDR>
+5. Run `make demo` in a separate terminal.
 
 # Querying for blocks:
 

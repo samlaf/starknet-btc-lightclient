@@ -1,4 +1,4 @@
-# %builtins range_check bitwise
+#%builtins range_check bitwise
 
 from sha256.sha256 import finalize_sha256, sha256
 from starkware.cairo.common.alloc import alloc
@@ -19,7 +19,7 @@ func compute_sha256{range_check_ptr, bitwise_ptr : BitwiseBuiltin*}(
 
     let (local output : felt*) = sha256{sha256_ptr=sha256_ptr}(input, n_bytes)
     # TODO: make finalize work
-    # finalize_sha256(sha256_ptr_start=sha256_ptr_start, sha256_ptr_end=sha256_ptr)
+    #finalize_sha256(sha256_ptr_start=sha256_ptr_start, sha256_ptr_end=sha256_ptr)
 
     return (
         output[3] + 2 ** 32 * output[2] + 2 ** 64 * output[1] + 2 ** 96 * output[0],
@@ -53,7 +53,7 @@ func main{range_check_ptr, bitwise_ptr : BitwiseBuiltin*}():
         # 16 byte preimage
         pack_intarray32(
             ids.input.address_,
-            "f" * 160)
+            "f" * 55 * 2)
     %}
 
     let (out1, out2) = compute_sha256(input.elements, input.byte_len)
