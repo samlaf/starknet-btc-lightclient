@@ -3,7 +3,7 @@
 from starkware.cairo.common.alloc import alloc
 from starkware.cairo.common.cairo_builtins import HashBuiltin
 
-from btc_header import BTCHeader, process_header
+from btc_header import BTCHeader, process_header, prepare_header
 
 @storage_var
 func block_header_lo(number: felt) -> (hash_lo: felt):
@@ -22,7 +22,7 @@ func process_block{
     data_len : felt,
     data : felt*,
 ):
-    alloc_locals
+    #alloc_locals
 
     # Retrieve previous block header hash (or zero hash if genesis)
     let (prev_hash : felt*) = alloc()
