@@ -1,4 +1,4 @@
-%builtins range_check bitwise
+# %builtins range_check bitwise
 from starkware.cairo.common.alloc import alloc
 from starkware.cairo.common.uint256 import Uint256, uint256_lt
 from utils import swap_endianness_64, get_target, prepare_hash
