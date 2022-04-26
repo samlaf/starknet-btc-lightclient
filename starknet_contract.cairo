@@ -19,14 +19,8 @@ func process_block{
         pedersen_ptr : HashBuiltin*,
         range_check_ptr}(
     height : felt,
-    version : felt,
-    previous_len : felt,
-    previous : felt*,
-    merkle_root_len : felt,
-    merkle_root : felt*,
-    time : felt,
-    bits : felt,
-    nonce : felt
+    data_len : felt,
+    data : felt*,
 ):
     alloc_locals
 
@@ -43,7 +37,7 @@ func process_block{
     end
 
     # Verify provided block header
-    let header = BTCHeader(version, previous, merkle_root, time, bits, nonce)
+    let header = prepare_header(data)
     let block_hash = process_header(header, prev_hash)
 
     # Write current header to storage
