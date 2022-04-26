@@ -24,15 +24,38 @@ end
 func get_target{range_check_ptr}(bits : felt) -> (res : Uint256):
     alloc_locals
     let (exponent, local mantissa) = unsigned_div_rem(bits, 2 ** 24)
-    %{
-        print("bits", hex(ids.bits))
-        print("exponent", ids.exponent)
-        print("mantissa", ids.mantissa)
-    %}
+    # %{
+    #     print("bits", hex(ids.bits))
+    #     print("exponent", ids.exponent)
+    #     print("mantissa", ids.mantissa)
+    #     print(hex(ids.mantissa*256**(ids.exponent - 3)))
+    # %}
     let (exp) = pow(256, exponent - 3)
     let tmp = mantissa * exp
     let res_target = split_felt(tmp)
     return (Uint256(res_target.low, res_target.high))
+end
+
+# Split a Uint256 into 8 32bit words ugly
+func prepare_hash{range_check_ptr}(inp : Uint256) -> (res : felt*):
+    alloc_locals
+    let (res : felt*) = alloc()
+    let (lolo, lohi) = unsigned_div_rem(inp.low, 2 ** 64)
+    let (lololo, lolohi) = unsigned_div_rem(lolo, 2 ** 32)
+    let (lohilo, lohihi) = unsigned_div_rem(lohi, 2 ** 32)
+    assert res[0] = lololo
+    assert res[1] = lolohi
+    assert res[2] = lohilo
+    assert res[3] = lohihi
+
+    let (hilo, hihi) = unsigned_div_rem(inp.high, 2 ** 64)
+    let (hilolo, hilohi) = unsigned_div_rem(hilo, 2 ** 32)
+    let (hihilo, hihihi) = unsigned_div_rem(hihi, 2 ** 32)
+    assert res[4] = hilolo
+    assert res[5] = hilohi
+    assert res[6] = hihilo
+    assert res[7] = hihihi
+    return (res)
 end
 
 # func swap_endianness_many_words{ range_check_ptr, bitwise_ptr : BitwiseBuiltin* }(input: IntsSequence) -> (output: IntsSequence):
@@ -44,7 +67,8 @@ end
 # end
 
 func swap_endianness_four_words{range_check_ptr, bitwise_ptr : BitwiseBuiltin*}(
-        input : IntsSequence) -> (output : IntsSequence):
+    input : IntsSequence
+) -> (output : IntsSequence):
     alloc_locals
     let (local acc : felt*) = alloc()
 
@@ -96,7 +120,8 @@ end
 # end
 
 func swap_endianness_64{range_check_ptr, bitwise_ptr : BitwiseBuiltin*}(
-        input : felt, size : felt) -> (output : felt):
+    input : felt, size : felt
+) -> (output : felt):
     alloc_locals
     let (local output : felt*) = alloc()
 

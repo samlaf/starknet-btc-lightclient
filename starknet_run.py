@@ -14,7 +14,7 @@ def subprocess_run(cmd):
 
 def verify_block(contract_addr, height, data):
     data = " ".join([str(i) for i in data])
-    cmd = f"starknet invoke --network_id=hackathon-0 --gateway_url=https://hackathon-0.starknet.io --feeder_gateway_url=https://hackathon-0.starknet.io --address {contract_addr} --abi starknet_contract_abi.json --function process_block --inputs {height} 20 " + data
+    cmd = f"starknet invoke --network_id=hackathon-0 --gateway_url=http://localhost:5000 --feeder_gateway_url=http://localhost:5000 --address {contract_addr} --abi build/starknet_contract_abi.json --function process_block --inputs {height} 20 " + data
     cmd = cmd.split(' ')
     ret = subprocess_run(cmd)
     ret = ret.split(': ')
@@ -30,10 +30,10 @@ def poll_until_accepted(list_of_tx_hashes, interval_in_sec):
         for i, tx_hash in enumerate(list_of_tx_hashes):
             if accepted_list[i]:
                 continue
-            cmd = f"starknet tx_status --network_id=hackathon-0 --gateway_url=https://hackathon-0.starknet.io --feeder_gateway_url=https://hackathon-0.starknet.io --hash={tx_hash}".split(' ')
+            cmd = f"starknet tx_status --network_id=hackathon-0 --gateway_url=http://localhost:5000 --feeder_gateway_url=http://localhost:5000 --hash={tx_hash}".split(' ')
             ret = subprocess_run(cmd)
             ret = json.loads(ret)
-            if ret['tx_status'] != 'ACCEPTED_ONCHAIN':
+            if ret['tx_status'] != 'ACCEPTED_ON_L2':
                 print(f"> {tx_hash} ({ret['tx_status']}) not accepted onchain yet.")
                 all_accepted = False
                 break
@@ -85,11 +85,11 @@ if __name__ == "__main__":
 
     block_height = 0
     while block_height < 733581:
-        print("Importing block from height {}", block_height)
+        print(f"Importing block from height {block_height}")
         block = get_block_by_height(block_height)
         data = header_to_cairo(block)
-        print("Verifying block from height {}", block_height)
+        print(f"Verifying block from height {block_height}")
         txhash = verify_block(CONTRACT_ADDR, block_height, data)
         print("Waiting for transaction to be mined")
-        #poll_until_accepted([txhash], 5)
+        poll_until_accepted([txhash], 1)
         block_height += 1
