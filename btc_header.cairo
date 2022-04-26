@@ -1,7 +1,7 @@
 %builtins range_check bitwise
 from starkware.cairo.common.alloc import alloc
 from starkware.cairo.common.uint256 import Uint256, uint256_lt
-from utils import swap_endianness_64, get_target
+from utils import swap_endianness_64, get_target, prepare_hash
 from sha256.sha256_contract import compute_sha256
 from utils.array_comparison import arr_eq
 from starkware.cairo.common.cairo_builtins import BitwiseBuiltin
@@ -65,7 +65,19 @@ func process_header{range_check_ptr, bitwise_ptr : BitwiseBuiltin*}(
 
     # WIP: Compute SHA256 of serialized header (big endian)
     let header_bytes = header.data
-    let (out1, out2) = compute_sha256(header_bytes, 55)  # TODO: Change 55 -> 80 when supported
+    let (tmp1, tmp2) = compute_sha256(header_bytes, 80)
+    let (spliced_tmp) = prepare_hash(Uint256(tmp1, tmp2))
+    let (tmpout1, tmpout2) = compute_sha256(spliced_tmp, 32)  # Second hash
+    # TODO Cairo way to do endianness
+    local out1
+    local out2
+    %{
+        data = f'{ids.tmpout1:032x}{ids.tmpout2:032x}'
+        data = "".join(data[::-1])
+        ids.out2 = int(data[:32], 16)
+        ids.out1 = int(data[32:], 16)
+    %}
+
     let (local curr_header_hash : felt*) = alloc()
     assert curr_header_hash[0] = out1
     assert curr_header_hash[1] = out2
@@ -78,12 +90,15 @@ func process_header{range_check_ptr, bitwise_ptr : BitwiseBuiltin*}(
     # - Parse bits into target and convert to Uint256
 
     let (target) = get_target(header.bits)
+    %{
+        print(hex(ids.out1), hex(ids.out2))
+        print(hex(ids.target.low), hex(ids.target.high))
+    %}
     let hash = Uint256(out1, out2)
     let (res) = uint256_lt(hash, target)
     assert res = 1
 
     # TODO: Verify difficulty target interval using timestamps
-
     # TODO: Return current header hash
 
     return (curr_header_hash)

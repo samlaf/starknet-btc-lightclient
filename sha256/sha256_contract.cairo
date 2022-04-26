@@ -1,4 +1,4 @@
-%builtins range_check bitwise
+# %builtins range_check bitwise
 
 from sha256.sha256 import finalize_sha256, sha256
 from starkware.cairo.common.alloc import alloc
