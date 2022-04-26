@@ -1,4 +1,4 @@
-# %builtins range_check bitwise
+%builtins range_check bitwise
 from starkware.cairo.common.alloc import alloc
 from starkware.cairo.common.uint256 import Uint256, uint256_lt
 from utils import swap_endianness_64, get_target
@@ -25,7 +25,8 @@ end
 
 # Assuming data is the header packed as an array of 4 bytes
 func prepare_header{range_check_ptr, bitwise_ptr : BitwiseBuiltin*}(data : felt*) -> (
-        res : BTCHeader):
+    res : BTCHeader
+):
     alloc_locals
     let (previous : felt*) = alloc()
     let (merkle_root : felt*) = alloc()
@@ -52,11 +53,14 @@ func prepare_header{range_check_ptr, bitwise_ptr : BitwiseBuiltin*}(data : felt*
     let (time) = swap_endianness_64(data[17], 4)
     let (bits) = swap_endianness_64(data[18], 4)
     let (nonce) = swap_endianness_64(data[19], 4)
-    return (res=BTCHeader(version, previous, merkle_root, time, bits, nonce, data))
+
+    local header : BTCHeader = BTCHeader(version, previous, merkle_root, time, bits, nonce, data)
+    return (header)
 end
 
 func process_header{range_check_ptr, bitwise_ptr : BitwiseBuiltin*}(
-        header : BTCHeader, prev_header_hash : felt*) -> (current_header_hash : felt*):
+    header : BTCHeader, prev_header_hash : felt*
+) -> (current_header_hash : felt*):
     alloc_locals
 
     # WIP: Compute SHA256 of serialized header (big endian)
@@ -81,9 +85,11 @@ func process_header{range_check_ptr, bitwise_ptr : BitwiseBuiltin*}(
     # TODO: Verify difficulty target interval using timestamps
 
     # TODO: Return current header hash
+
     return (curr_header_hash)
 end
 
+# NOTE: Uncomment builtin directive on line 1 of this file to run with Makefile
 func main{range_check_ptr, bitwise_ptr : BitwiseBuiltin*}():
     alloc_locals
 

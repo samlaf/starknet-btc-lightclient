@@ -57,7 +57,7 @@ def verifyBlock(block):
         merkleRootHex + timeHex + bitsHex + nonceB
     header_bin = unhexlify(header_hex)
     hash = sha256(sha256(header_bin).digest()).digest()
-    print(hash[::-1].hex())
+    #print(hash[::-1].hex())
 
 def header_to_cairo(block):
     versionHex = big_to_little_endian(block['versionHex'])
@@ -73,17 +73,19 @@ def header_to_cairo(block):
     header_bin = unhexlify(header_hex)
     
     data = header_bin.hex()
-    print(data)
+    #print(data)
     
     #return [data[8*i:8*(i+1)] for i in range(160//8)]
     tmp = [int(data[8*i:8*(i+1)], 16) for i in range(160//8)]
-    for i,d in enumerate(tmp):
-        print(f'data[{i}] = {d}')
+    #for i,d in enumerate(tmp):
+    #    print(f'data[{i}] = {d}')
+    return tmp
 
-print(header_to_cairo(block0))
-print(header_to_cairo(block1))
-
-verifyBlock(block0)
-print(block0['hash'])
-verifyBlock(block1)
-print(block1['hash'])
+if __name__ == "__main__":
+    print(header_to_cairo(block0))
+    print(header_to_cairo(block1))
+    
+    verifyBlock(block0)
+    print(block0['hash'])
+    verifyBlock(block1)
+    print(block1['hash'])

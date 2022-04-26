@@ -4,5 +4,4 @@ export STARKNET_CHAIN_ID=SN_GOERLI
 export STARKNET_NETWORK_ID=hackathon-0
 unset STARKNET_NETWORK
 
-# Check if the CLI works.
-starknet get_block
+starknet deploy --contract starknet_contract_compiled.json
