@@ -1,0 +1,21 @@
+[
+    {
+        "inputs": [
+            {
+                "name": "height",
+                "type": "felt"
+            },
+            {
+                "name": "data_len",
+                "type": "felt"
+            },
+            {
+                "name": "data",
+                "type": "felt*"
+            }
+        ],
+        "name": "process_block",
+        "outputs": [],
+        "type": "function"
+    }
+]
