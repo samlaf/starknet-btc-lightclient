@@ -7,7 +7,7 @@ run:
 	@echo "Running.." 
 	@cairo-run --program btc_header.json --print_output --layout=all --print_info
 
-sha256:
+sha:
 	@echo "Compiling.."
 	@cairo-compile sha256/sha256_contract.cairo --output sha256/sha256_cairo_contract_compiled.json
 	@echo "Running.."
