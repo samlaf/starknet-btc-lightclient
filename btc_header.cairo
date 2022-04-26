@@ -154,8 +154,6 @@ func main{range_check_ptr, bitwise_ptr : BitwiseBuiltin*}():
     let (zero_hash : felt*) = alloc()
     assert zero_hash[0] = 0
     assert zero_hash[1] = 0
-    assert zero_hash[2] = 0
-    assert zero_hash[3] = 0
 
     let (block_hash0) = process_header(block_header0, zero_hash)
     let (block_hash1) = process_header(block_header1, block_hash0)
