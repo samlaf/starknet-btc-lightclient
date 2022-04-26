@@ -1,4 +1,4 @@
-# %builtins range_check bitwise
+%builtins range_check bitwise
 
 from sha256.sha256 import finalize_sha256, sha256
 from starkware.cairo.common.alloc import alloc
@@ -53,7 +53,7 @@ func main{range_check_ptr, bitwise_ptr : BitwiseBuiltin*}():
         # 16 byte preimage
         pack_intarray32(
             ids.input.address_,
-            "f" * 160)
+            "f" * 16)
     %}
 
     let (out1, out2) = compute_sha256(input.elements, input.byte_len)
