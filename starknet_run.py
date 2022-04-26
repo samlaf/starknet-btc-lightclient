@@ -45,14 +45,14 @@ def poll_until_accepted(list_of_tx_hashes, interval_in_sec):
         else:
             print(f'> retry polling in {interval_in_sec} seconds.')
             time.sleep(interval_in_sec)
-    print(f'> all tx hashes are accepted onchain.')
+    print('> all tx hashes are accepted onchain.')
     return
 
 def get_block_by_height(height):
     # Retrieve block hash from height
     block_hash = requests.post(
         'https://btc.getblock.io/mainnet/',
-        headers = {
+        headers={
             'Content-Type': 'application/json',
             'x-api-key': API_KEY
         },
@@ -66,7 +66,7 @@ def get_block_by_height(height):
     # Retrieve block header from hash
     block = requests.post(
         'https://btc.getblock.io/mainnet/',
-        headers = {
+        headers={
             'Content-Type': 'application/json',
             'x-api-key': API_KEY
         },

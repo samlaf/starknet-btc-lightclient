@@ -2,6 +2,7 @@
 
 from starkware.cairo.common.alloc import alloc
 from starkware.cairo.common.cairo_builtins import HashBuiltin
+from starkware.cairo.common.cairo_builtins import BitwiseBuiltin
 
 from btc_header import BTCHeader, process_header, prepare_header
 
@@ -17,6 +18,7 @@ end
 func process_block{
         syscall_ptr : felt*,
         pedersen_ptr : HashBuiltin*,
+        bitwise_ptr : BitwiseBuiltin*,
         range_check_ptr}(
     height : felt,
     data_len : felt,
@@ -29,11 +31,13 @@ func process_block{
     if height == 0:
         assert prev_hash[0] = 0
         assert prev_hash[1] = 0
+        tempvar range_check_ptr=range_check_ptr
     else:
         let (lo) = block_header_lo.read(height - 1)
         let (hi) = block_header_hi.read(height - 1)
         assert prev_hash[0] = lo
         assert prev_hash[1] = hi
+        tempvar range_check_ptr=range_check_ptr
     end
 
     # Verify provided block header
