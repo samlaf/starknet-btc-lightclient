@@ -6,6 +6,8 @@ with open("block0.json") as block0_file:
     block0 = json.load(block0_file)
 with open("block1.json") as block1_file:
     block1 = json.load(block1_file)
+with open("block170.json") as block170_file:
+    block170 = json.load(block170_file)
 
 # from bitcoinlib.blocks import Block
 # b = Block(block1['hash'], block1['version'], block1['previousblockhash'],
@@ -65,6 +67,21 @@ def verifyBlock(block):
     hash = sha256(sha256(header_bin).digest()).digest()
     print(hash[::-1].hex())
 
+    # compute the difficulty target from compact form of nbits.
+    nbits = int(block['bits'],16)
+    exp = (nbits & 0xff000000) >> 24
+    mult = (nbits & 0x7fffff)   # careful there is only 23 bits of significance!
+    sign = (nbits & 0x800000)   # should not happen! but it might, what to do? XXX
+    target_difficulty = 2**(8*exp - 3) * mult
+
+    print( exp )
+    print( mult )
+    print( hex(target_difficulty)  )
+
+    # Proof of Work verification.
+    meets_target = int(block['hash'],16) <= target_difficulty
+    print( meets_target )
+
 
 def header_to_cairo(block):
     versionHex = big_to_little_endian(block['versionHex'])
@@ -97,3 +114,5 @@ if __name__ == "__main__":
     print(block0['hash'])
     verifyBlock(block1)
     print(block1['hash'])
+    verifyBlock(block170)
+    print(block170['hash'])
